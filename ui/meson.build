@@ -140,6 +140,9 @@ if spice.found()
     'spice-input.c',
     'spice-display.c'
   ))
+  vfio_encode_display_ss = ss.source_set()
+  vfio_encode_display_ss.add(gstreamer, gstpluginsbase, gstbad, gstallocators, gstvideo, gstappsrc,gstgl, files('vfio-encode-display.c'))
+  ui_modules += {'vfio_encode_display' : vfio_encode_display_ss}
   ui_modules += {'spice-core' : spice_core_ss}
 endif
 

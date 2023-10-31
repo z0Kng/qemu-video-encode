@@ -212,6 +212,8 @@ option('spice', type : 'feature', value : 'auto',
        description: 'Spice server support')
 option('spice_protocol', type : 'feature', value : 'auto',
        description: 'Spice protocol support')
+option('gstreamer', type : 'feature', value : 'auto',
+       description: 'gstreamer')  
 option('u2f', type : 'feature', value : 'auto',
        description: 'U2F emulation support')
 option('canokey', type : 'feature', value : 'auto',

@@ -342,6 +342,7 @@ void egl_dmabuf_import_texture(QemuDmaBuf *dmabuf)
                               NULL, attrs);
     if (image == EGL_NO_IMAGE_KHR) {
         error_report("eglCreateImageKHR failed");
+        perror("eglCreateImageKHR: ");
         return;
     }
 

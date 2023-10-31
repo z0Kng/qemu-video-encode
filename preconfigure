@@ -1,0 +1,1 @@
+./configure --enable-dbus-display --enable-gtk --enable-gstreamer --enable-slirp --enable-kvm --enable-opengl --enable-debug --enable-spice --enable-spice-protocol --enable-trace-backends=log

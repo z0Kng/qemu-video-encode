@@ -1033,6 +1033,37 @@ if not get_option('spice').auto() or have_system
 endif
 spice_headers = spice.partial_dependency(compile_args: true, includes: true)
 
+gstreamer = not_found
+gstallocators = not_found
+gstpluginsbase = not_found
+gstvideo = not_found
+stappsrc = not_found
+gstbad = not_found
+gstgl = not_found
+if not get_option('gstreamer').auto() or have_system
+  gstreamer = dependency('gstreamer-1.0', version: '>=1.20', 
+                     required: get_option('gstreamer'),
+                     method: 'pkg-config')
+  gstpluginsbase = dependency('gstreamer-plugins-base-1.0', version: '>=1.20', 
+                     required: get_option('gstreamer'),
+                     method: 'pkg-config')          
+  gstallocators = dependency('gstreamer-allocators-1.0', version: '>=1.20', 
+                     required: get_option('gstreamer'),
+                     method: 'pkg-config')
+  gstvideo = dependency('gstreamer-video-1.0', version: '>=1.20', 
+                     required: get_option('gstreamer'),
+                     method: 'pkg-config')  
+  gstappsrc = dependency('gstreamer-app-1.0', version: '>=1.20', 
+                     required: get_option('gstreamer'),
+                     method: 'pkg-config')      
+  gstbad = dependency('gstreamer-plugins-bad-1.0', version: '>=1.20', 
+                     required: get_option('gstreamer'),
+                     method: 'pkg-config')           
+  gstgl = dependency('gstreamer-gl-1.0', version: '>=1.20', 
+                     required: get_option('gstreamer'),
+                     method: 'pkg-config')                                                                     
+endif
+
 rt = cc.find_library('rt', required: false)
 
 libiscsi = not_found
@@ -2182,6 +2213,13 @@ config_host_data.set('CONFIG_SPICE_PROTOCOL_MINOR', spice_protocol.version().spl
 config_host_data.set('CONFIG_SPICE_PROTOCOL_MICRO', spice_protocol.version().split('.')[2])
 endif
 config_host_data.set('CONFIG_SPICE', spice.found())
+config_host_data.set('CONFIG_GSTREAMER', gstreamer.found())
+config_host_data.set('CONFIG_GSTREAMER_PLUGINS_BASE', gstpluginsbase.found())
+config_host_data.set('CONFIG_GSTREAMER_ALLOCATORS', gstallocators.found())
+config_host_data.set('CONFIG_GSTREAMER_VIDEO', gstvideo.found())
+config_host_data.set('CONFIG_GSTREAMER_APPSRC', gstappsrc.found())
+config_host_data.set('CONFIG_GSTREAMER_BAD', gstbad.found())
+config_host_data.set('CONFIG_GSTREAMER_GL', gstgl.found())
 config_host_data.set('CONFIG_X11', x11.found())
 config_host_data.set('CONFIG_DBUS_DISPLAY', dbus_display)
 config_host_data.set('CONFIG_CFI', get_option('cfi'))
@@ -2853,6 +2891,7 @@ host_kconfig = \
   (get_option('fuzzing') ? ['CONFIG_FUZZ=y'] : []) + \
   (have_tpm ? ['CONFIG_TPM=y'] : []) + \
   (spice.found() ? ['CONFIG_SPICE=y'] : []) + \
+  (gstreamer.found() ? ['CONFIG_GSTREAMER=y'] : []) + \
   (have_ivshmem ? ['CONFIG_IVSHMEM=y'] : []) + \
   (opengl.found() ? ['CONFIG_OPENGL=y'] : []) + \
   (x11.found() ? ['CONFIG_X11=y'] : []) + \

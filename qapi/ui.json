@@ -1485,6 +1485,7 @@
     { 'name': 'gtk', 'if': 'CONFIG_GTK' },
     { 'name': 'sdl', 'if': 'CONFIG_SDL' },
     { 'name': 'egl-headless', 'if': 'CONFIG_OPENGL' },
+    { 'name': 'vfio-encode', 'if': 'CONFIG_SPICE' },     
     { 'name': 'curses', 'if': 'CONFIG_CURSES' },
     { 'name': 'cocoa', 'if': 'CONFIG_COCOA' },
     { 'name': 'spice-app', 'if': 'CONFIG_SPICE' },

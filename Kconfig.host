@@ -14,6 +14,9 @@ config X11
 config SPICE
     bool
 
+config GSTREAMER
+    bool
+
 config IVSHMEM
     bool
 
